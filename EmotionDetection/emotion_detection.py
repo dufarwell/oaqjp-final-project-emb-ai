@@ -19,6 +19,4 @@ def emotion_detector(text_to_analyse):
 
     rsp['dominant_emotion']=top_emotion
 
-
-
     return rsp
