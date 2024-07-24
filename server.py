@@ -12,9 +12,13 @@ def emotion_test():
     text_to_test = request.args.get("textToAnalyze")
     res = emotion_detector(text_to_test)
     
-    rtrn = "For the given statement, the system response is "
-    for emotion in [r for r in res if not r == 'dominant_emotion']:
-        rtrn += f"'{emotion}': {res[emotion]}, "
-    rtrn = rtrn[:-2] + f". The dominant emotion is {res['dominant_emotion']}."
+    if not res.get('dominant_emotion',None):
+        rtrn = "Invalid text! Please try again!."
+    else:
+        rtrn = "For the given statement, the system response is "
+        for emotion in [r for r in res if not r == 'dominant_emotion']:
+            rtrn += f"'{emotion}': {res[emotion]}, "
+        rtrn = rtrn[:-2] + f". The dominant emotion is {res['dominant_emotion']}."
 
+    
     return rtrn
